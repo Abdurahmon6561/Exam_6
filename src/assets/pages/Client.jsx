@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+import { useGetData } from "../../hooks/UseGetData";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(
-          "https://ecommerce-backend-fawn-eight.vercel.app/api/products"
-        );
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const products = useGetData("products")
 
   return (
     <div className="container mx-auto py-8 bg-blue-500">
@@ -25,7 +13,7 @@ const ProductList = () => {
         Product List
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {products.map((product) => (
+        {products && products.map((product) => (
           <div
             key={product.id}
             className="forcanera bg-white shadow-md rounded-lg overflow-hidden transition duration-700 ease-in-out transform hover:scale-105 cursor-pointer hover:bg-blue-400 hover:text-white flex"
